@@ -8,14 +8,10 @@ import {
   Lightbulb, 
   Mail, 
   Linkedin, 
-  Github,
   Rocket,
-  Users,
-  Zap,
   Sun,
   Moon,
   Terminal,
-  Flag,
   Gem,
   Car
 } from 'lucide-react'
@@ -124,7 +120,6 @@ export default function Home() {
                 <p className={`text-lg leading-relaxed ${
                   darkMode ? 'text-white/60' : 'text-gray-600'
                 }`}>
-                  {/* Placeholder for additional mission text you can refine later */}
                   I believe the best companies are built at the intersection of passion and purpose. 
                   Every venture I pursue is driven by this conviction.
                 </p>
@@ -199,11 +194,9 @@ export default function Home() {
                     Palmetto Auto Club
                   </h3>
                   <p className={`text-sm mb-3 ${darkMode ? 'text-white/50' : 'text-gray-500'}`}>
-                    {/* Add your role here */}
                     Role Title
                   </p>
                   <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    {/* Add description of your work here */}
                     Description of your contributions and impact at Palmetto Auto Club.
                   </p>
                 </div>
@@ -227,11 +220,9 @@ export default function Home() {
                     Signet Jewelers
                   </h3>
                   <p className={`text-sm mb-3 ${darkMode ? 'text-white/50' : 'text-gray-500'}`}>
-                    {/* Add your role here */}
                     Role Title
                   </p>
                   <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    {/* Add description of your work here */}
                     Description of your contributions and impact at Signet Jewelers.
                   </p>
                 </div>
@@ -315,7 +306,7 @@ export default function Home() {
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <a 
-                href="mailto:chris@turblu.com" 
+                href="mailto:ChristopherE710@gmail.com" 
                 className={`px-6 py-3 rounded-full flex items-center gap-2 transition-all ${
                   darkMode 
                     ? 'glass glass-card-hover text-white/80 hover:text-white' 
@@ -326,7 +317,7 @@ export default function Home() {
                 Email
               </a>
               <a 
-                href="https://linkedin.com/in/christopherestep" 
+                href="https://www.linkedin.com/in/christopher-estep-8b736312a/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`px-6 py-3 rounded-full flex items-center gap-2 transition-all ${
@@ -337,19 +328,6 @@ export default function Home() {
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
-              </a>
-              <a 
-                href="https://github.com/christopherestep" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-6 py-3 rounded-full flex items-center gap-2 transition-all ${
-                  darkMode 
-                    ? 'glass glass-card-hover text-white/80 hover:text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                <Github className="w-5 h-5" />
-                GitHub
               </a>
             </div>
           </div>
