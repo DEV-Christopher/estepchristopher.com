@@ -204,7 +204,7 @@ export default function Home() {
                     Supply Chain Leadership
                   </p>
                   <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    Working closely with senior leadership and C-suite on strategic supply chain initiatives across brands like Kay, Jared, Zales, Banter, Peoples, James Allen, Blue Nile, and more at this multi-billion dollar retailer. 
+                    Working closely with senior leadership and C-suite on strategic supply chain initiatives at this multi-billion dollar retailer. 
                     Achieved significant operational improvements, including halving transit loss, saving millions annually. 
                   </p>
                 </div>
