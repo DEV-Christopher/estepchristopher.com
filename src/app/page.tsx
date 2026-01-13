@@ -138,7 +138,7 @@ export default function Home() {
           <p className={`text-center mb-12 max-w-2xl mx-auto ${
             darkMode ? 'text-white/50' : 'text-gray-500'
           }`}>
-            Building at the intersection of technology, innovation, and leadership
+            Focused on technology, innovation, and leadership.
           </p>
 
           <div className="space-y-6">
@@ -204,8 +204,8 @@ export default function Home() {
                     Supply Chain Leadership
                   </p>
                   <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    Working closely with senior leadership and C-suite on strategic supply chain initiatives at this multi-billion dollar retailer. 
-                    Achieved significant operational improvements, including halving transit loss and driving millions in annual savings.
+                    Working closely with senior leadership and C-suite on strategic supply chain initiatives across brands like Kay, Jared, Zales, Banter, Peoples, James Allen, Blue Nile, and more at this multi-billion dollar retailer. 
+                    Achieved significant operational improvements, including halving transit loss, saving millions annually. 
                   </p>
                 </div>
               </div>
