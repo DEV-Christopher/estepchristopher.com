@@ -8,9 +8,23 @@
   --turblu-end: #d946ef;
 }
 
+/* Dark mode background (default) */
+.dark-mode {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+}
+
+/* Light mode background */
+.light-mode {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  min-height: 100vh;
+}
+
+/* Fallback for body before JS loads */
 body {
   background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
   min-height: 100vh;
+  transition: background 0.3s ease;
 }
 
 @layer components {
@@ -78,6 +92,10 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  .bg-turblu-gradient {
+    background: linear-gradient(135deg, var(--turblu-start) 0%, var(--turblu-mid) 50%, var(--turblu-end) 100%);
+  }
 }
 
 /* Smooth scrolling */
@@ -88,4 +106,9 @@ html {
 /* Selection color */
 ::selection {
   background: rgba(139, 92, 246, 0.3);
+}
+
+/* Light mode selection */
+.light-mode ::selection {
+  background: rgba(139, 92, 246, 0.2);
 }
