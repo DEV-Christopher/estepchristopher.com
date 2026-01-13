@@ -75,7 +75,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section - Name Only */}
-      <section className="min-h-[60vh] flex items-center justify-center px-6 pt-24">
+      <section className="min-h-[40vh] flex items-center justify-center px-6 pt-24">
         <div className="max-w-4xl mx-auto text-center">
           <div className={`flex items-center justify-center gap-2 mb-4 ${
             darkMode ? 'text-white/50' : 'text-gray-500'
@@ -92,7 +92,7 @@ export default function Home() {
       </section>
 
       {/* Mission Section - With Photo Placeholder */}
-      <section id="mission" className="py-24 px-6">
+      <section id="mission" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className={`rounded-3xl p-12 md:p-16 transition-all duration-300 ${
             darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-xl'
@@ -130,20 +130,20 @@ export default function Home() {
       </section>
 
       {/* Journey Section - Career Timeline */}
-      <section id="journey" className="py-24 px-6">
+      <section id="journey" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className={`text-3xl md:text-4xl font-semibold mb-4 text-center ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`}>The Journey So Far</h2>
-          <p className={`text-center mb-16 max-w-2xl mx-auto ${
+          <p className={`text-center mb-12 max-w-2xl mx-auto ${
             darkMode ? 'text-white/50' : 'text-gray-500'
           }`}>
             Building at the intersection of technology, innovation, and leadership
           </p>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Turblu - Current */}
-            <div className={`rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border ${
+            <div id="turblu" className={`rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border ${
               darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-lg'
             }`}>
               <div className="flex flex-col md:flex-row md:items-center gap-6">
@@ -167,13 +167,47 @@ export default function Home() {
                   </p>
                 </div>
                 <a 
-                  href="https://turblu.com" 
+                  href="https://Turblu.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-turblu-gradient w-14 h-14 rounded-xl flex items-center justify-center hover:scale-105 transition-transform group flex-shrink-0"
                 >
                   <ArrowUpRight className="w-6 h-6 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
+              </div>
+            </div>
+
+            {/* Signet Jewelers - Current */}
+            <div className={`rounded-2xl p-8 md:p-10 transition-all duration-300 ${
+              darkMode 
+                ? 'glass-card glass-card-hover' 
+                : 'bg-white/70 border border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-1'
+            }`}>
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                  darkMode ? 'bg-white/10' : 'bg-gray-100'
+                }`}>
+                  <Gem className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
+                </div>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                      Signet Jewelers
+                    </h3>
+                    <span className={`text-xs px-3 py-1 rounded-full font-medium ${
+                      darkMode ? 'bg-white/10 text-white/70' : 'bg-gray-200 text-gray-600'
+                    }`}>
+                      Current
+                    </span>
+                  </div>
+                  <p className={`text-sm mb-3 ${darkMode ? 'text-white/50' : 'text-gray-500'}`}>
+                    Supply Chain Leadership
+                  </p>
+                  <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
+                    Working closely with senior leadership and C-suite on strategic supply chain initiatives at this multi-billion dollar retailer. 
+                    Achieved significant operational improvements, including halving transit loss and driving millions in annual savings.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -194,36 +228,11 @@ export default function Home() {
                     Palmetto Auto Club
                   </h3>
                   <p className={`text-sm mb-3 ${darkMode ? 'text-white/50' : 'text-gray-500'}`}>
-                    Role Title
+                    Founder
                   </p>
                   <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    Description of your contributions and impact at Palmetto Auto Club.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Signet Jewelers */}
-            <div className={`rounded-2xl p-8 md:p-10 transition-all duration-300 ${
-              darkMode 
-                ? 'glass-card glass-card-hover' 
-                : 'bg-white/70 border border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-1'
-            }`}>
-              <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  darkMode ? 'bg-white/10' : 'bg-gray-100'
-                }`}>
-                  <Gem className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
-                </div>
-                <div className="flex-1">
-                  <h3 className={`text-2xl font-semibold mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Signet Jewelers
-                  </h3>
-                  <p className={`text-sm mb-3 ${darkMode ? 'text-white/50' : 'text-gray-500'}`}>
-                    Role Title
-                  </p>
-                  <p className={`text-lg leading-relaxed ${darkMode ? 'text-white/70' : 'text-gray-600'}`}>
-                    Description of your contributions and impact at Signet Jewelers.
+                    Founded in 2021 to connect East Coast car enthusiasts through premium rallies, curated events, and philanthropic initiatives. 
+                    Built an upscale community experience for automotive passion and giving back.
                   </p>
                 </div>
               </div>
@@ -233,12 +242,12 @@ export default function Home() {
       </section>
 
       {/* What I Bring Section */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className={`text-3xl md:text-4xl font-semibold mb-4 text-center ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`}>What I Bring</h2>
-          <p className={`text-center mb-16 max-w-2xl mx-auto ${
+          <p className={`text-center mb-12 max-w-2xl mx-auto ${
             darkMode ? 'text-white/50' : 'text-gray-500'
           }`}>
             A blend of vision, technical expertise, and leadership
@@ -291,7 +300,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6">
+      <section id="contact" className="py-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className={`rounded-3xl p-12 md:p-16 transition-all duration-300 ${
             darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-xl'
