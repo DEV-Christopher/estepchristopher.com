@@ -13,7 +13,7 @@ import {
   Moon,
   Terminal,
   Gem,
-  Flag
+  Gauge
 } from 'lucide-react'
 
 // Interactive geometric background component
@@ -413,7 +413,7 @@ export default function Home() {
                 <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   darkMode ? 'bg-white/10' : 'bg-gray-100'
                 }`}>
-                  <Flag className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
+                  <Gauge className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
                 </div>
                 <div className="flex-1">
                   <h3 className={`text-2xl font-semibold mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
