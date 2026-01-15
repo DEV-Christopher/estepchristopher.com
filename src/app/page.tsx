@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { 
   ArrowUpRight, 
   Briefcase, 
-  Code2, 
+  Zap, 
   Lightbulb, 
   Mail, 
   Linkedin, 
@@ -466,11 +466,11 @@ export default function Home() {
                 : 'bg-white/70 border border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-1'
             }`}>
               <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
-                <Code2 className="w-6 h-6 text-white" />
+                <Zap className="w-6 h-6 text-white" />
               </div>
-              <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Technologist</h3>
+              <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Operations & Analytics</h3>
               <p className={`leading-relaxed ${darkMode ? 'text-white/60' : 'text-gray-600'}`}>
-                Deep technical background with hands-on experience across the full stack. Architecture to deployment.
+                Turning data into millions of dollars through advanced analytics like Alteryx and process optimization. Building efficient systems that scale with the business.
               </p>
             </div>
 
