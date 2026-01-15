@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { 
   ArrowUpRight, 
   Briefcase, 
@@ -15,6 +15,169 @@ import {
   Gem,
   Car
 } from 'lucide-react'
+
+// Interactive geometric background component
+function GeometricBackground({ darkMode }: { darkMode: boolean }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const mouseRef = useRef({ x: 0, y: 0 })
+  const particlesRef = useRef<Array<{
+    x: number
+    y: number
+    baseX: number
+    baseY: number
+    size: number
+    type: 'circle' | 'line' | 'hexagon' | 'triangle'
+    rotation: number
+    rotationSpeed: number
+    opacity: number
+  }>>([])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const resizeCanvas = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+    }
+
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
+
+    // Initialize particles
+    const particleCount = 25
+    particlesRef.current = []
+    
+    for (let i = 0; i < particleCount; i++) {
+      const x = Math.random() * canvas.offsetWidth
+      const y = Math.random() * canvas.offsetHeight
+      particlesRef.current.push({
+        x,
+        y,
+        baseX: x,
+        baseY: y,
+        size: Math.random() * 20 + 10,
+        type: ['circle', 'line', 'hexagon', 'triangle'][Math.floor(Math.random() * 4)] as 'circle' | 'line' | 'hexagon' | 'triangle',
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.01,
+        opacity: Math.random() * 0.3 + 0.1
+      })
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      }
+    }
+
+    canvas.addEventListener('mousemove', handleMouseMove)
+
+    const drawHexagon = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+      ctx.beginPath()
+      for (let i = 0; i < 6; i++) {
+        const angle = rotation + (Math.PI / 3) * i
+        const px = x + size * Math.cos(angle)
+        const py = y + size * Math.sin(angle)
+        if (i === 0) ctx.moveTo(px, py)
+        else ctx.lineTo(px, py)
+      }
+      ctx.closePath()
+      ctx.stroke()
+    }
+
+    const drawTriangle = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
+      ctx.beginPath()
+      for (let i = 0; i < 3; i++) {
+        const angle = rotation + (Math.PI * 2 / 3) * i - Math.PI / 2
+        const px = x + size * Math.cos(angle)
+        const py = y + size * Math.sin(angle)
+        if (i === 0) ctx.moveTo(px, py)
+        else ctx.lineTo(px, py)
+      }
+      ctx.closePath()
+      ctx.stroke()
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+
+      const baseColor = darkMode ? '255, 255, 255' : '100, 100, 120'
+
+      particlesRef.current.forEach((particle) => {
+        // Calculate distance from mouse
+        const dx = mouseRef.current.x - particle.x
+        const dy = mouseRef.current.y - particle.y
+        const distance = Math.sqrt(dx * dx + dy * dy)
+        const maxDistance = 150
+
+        // Move particles away from mouse
+        if (distance < maxDistance) {
+          const force = (maxDistance - distance) / maxDistance
+          const angle = Math.atan2(dy, dx)
+          particle.x = particle.baseX - Math.cos(angle) * force * 30
+          particle.y = particle.baseY - Math.sin(angle) * force * 30
+        } else {
+          // Slowly return to base position
+          particle.x += (particle.baseX - particle.x) * 0.05
+          particle.y += (particle.baseY - particle.y) * 0.05
+        }
+
+        // Rotate
+        particle.rotation += particle.rotationSpeed
+
+        // Draw particle
+        ctx.strokeStyle = `rgba(${baseColor}, ${particle.opacity})`
+        ctx.lineWidth = 1
+
+        switch (particle.type) {
+          case 'circle':
+            ctx.beginPath()
+            ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2)
+            ctx.stroke()
+            break
+          case 'line':
+            ctx.beginPath()
+            const lineX = Math.cos(particle.rotation) * particle.size
+            const lineY = Math.sin(particle.rotation) * particle.size
+            ctx.moveTo(particle.x - lineX / 2, particle.y - lineY / 2)
+            ctx.lineTo(particle.x + lineX / 2, particle.y + lineY / 2)
+            ctx.stroke()
+            break
+          case 'hexagon':
+            drawHexagon(ctx, particle.x, particle.y, particle.size / 2, particle.rotation)
+            break
+          case 'triangle':
+            drawTriangle(ctx, particle.x, particle.y, particle.size / 2, particle.rotation)
+            break
+        }
+      })
+
+      requestAnimationFrame(animate)
+    }
+
+    const animationId = requestAnimationFrame(animate)
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas)
+      canvas.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(animationId)
+    }
+  }, [darkMode])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-auto"
+      style={{ opacity: 0.6 }}
+    />
+  )
+}
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true)
@@ -74,9 +237,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Name Only */}
-      <section className="min-h-[40vh] flex items-center justify-center px-6 pt-24">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Hero Section - Name Only - With Interactive Background */}
+      <section className="min-h-[40vh] flex items-center justify-center px-6 pt-24 relative overflow-hidden">
+        {/* Interactive Geometric Background */}
+        <GeometricBackground darkMode={darkMode} />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className={`flex items-center justify-center gap-2 mb-4 ${
             darkMode ? 'text-white/50' : 'text-gray-500'
           }`}>
