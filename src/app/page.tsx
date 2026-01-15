@@ -13,13 +13,13 @@ import {
   Moon,
   Terminal,
   Gem,
-  Car
+  Flag
 } from 'lucide-react'
 
 // Interactive geometric background component
 function GeometricBackground({ darkMode }: { darkMode: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const mouseRef = useRef({ x: 0, y: 0 })
+  const mouseRef = useRef({ x: -1000, y: -1000 })
   const particlesRef = useRef<Array<{
     x: number
     y: number
@@ -30,6 +30,11 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
     rotation: number
     rotationSpeed: number
     opacity: number
+    idleOffsetX: number
+    idleOffsetY: number
+    idleSpeedX: number
+    idleSpeedY: number
+    idlePhase: number
   }>>([])
 
   useEffect(() => {
@@ -64,7 +69,12 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
         type: ['circle', 'line', 'hexagon', 'triangle'][Math.floor(Math.random() * 4)] as 'circle' | 'line' | 'hexagon' | 'triangle',
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.01,
-        opacity: Math.random() * 0.3 + 0.1
+        opacity: Math.random() * 0.3 + 0.1,
+        idleOffsetX: 0,
+        idleOffsetY: 0,
+        idleSpeedX: (Math.random() - 0.5) * 0.02,
+        idleSpeedY: (Math.random() - 0.5) * 0.02,
+        idlePhase: Math.random() * Math.PI * 2
       })
     }
 
@@ -76,7 +86,12 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
       }
     }
 
+    const handleMouseLeave = () => {
+      mouseRef.current = { x: -1000, y: -1000 }
+    }
+
     canvas.addEventListener('mousemove', handleMouseMove)
+    canvas.addEventListener('mouseleave', handleMouseLeave)
 
     const drawHexagon = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
       ctx.beginPath()
@@ -104,13 +119,22 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
       ctx.stroke()
     }
 
+    let time = 0
     const animate = () => {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+      time += 0.016 // roughly 60fps
 
       const baseColor = darkMode ? '255, 255, 255' : '100, 100, 120'
 
       particlesRef.current.forEach((particle) => {
+        // Subtle idle movement using sine waves
+        particle.idleOffsetX = Math.sin(time * particle.idleSpeedX * 50 + particle.idlePhase) * 3
+        particle.idleOffsetY = Math.cos(time * particle.idleSpeedY * 50 + particle.idlePhase) * 3
+
         // Calculate distance from mouse
+        const targetX = particle.baseX + particle.idleOffsetX
+        const targetY = particle.baseY + particle.idleOffsetY
+        
         const dx = mouseRef.current.x - particle.x
         const dy = mouseRef.current.y - particle.y
         const distance = Math.sqrt(dx * dx + dy * dy)
@@ -120,12 +144,12 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
         if (distance < maxDistance) {
           const force = (maxDistance - distance) / maxDistance
           const angle = Math.atan2(dy, dx)
-          particle.x = particle.baseX - Math.cos(angle) * force * 30
-          particle.y = particle.baseY - Math.sin(angle) * force * 30
+          particle.x = targetX - Math.cos(angle) * force * 30
+          particle.y = targetY - Math.sin(angle) * force * 30
         } else {
-          // Slowly return to base position
-          particle.x += (particle.baseX - particle.x) * 0.05
-          particle.y += (particle.baseY - particle.y) * 0.05
+          // Slowly move towards idle position
+          particle.x += (targetX - particle.x) * 0.05
+          particle.y += (targetY - particle.y) * 0.05
         }
 
         // Rotate
@@ -166,6 +190,7 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
     return () => {
       window.removeEventListener('resize', resizeCanvas)
       canvas.removeEventListener('mousemove', handleMouseMove)
+      canvas.removeEventListener('mouseleave', handleMouseLeave)
       cancelAnimationFrame(animationId)
     }
   }, [darkMode])
@@ -388,7 +413,7 @@ export default function Home() {
                 <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   darkMode ? 'bg-white/10' : 'bg-gray-100'
                 }`}>
-                  <Car className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
+                  <Flag className={`w-8 h-8 ${darkMode ? 'text-white/70' : 'text-gray-600'}`} />
                 </div>
                 <div className="flex-1">
                   <h3 className={`text-2xl font-semibold mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
