@@ -143,9 +143,15 @@ export default function Home() {
 
           <div className="space-y-6">
             {/* Turblu - Current */}
-            <div id="turblu" className={`rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border ${
-              darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-lg'
-            }`}>
+            <a 
+              href="https://www.turblu.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              id="turblu" 
+              className={`block rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border cursor-pointer ${
+                darkMode ? 'glass-card hover:bg-white/[0.06]' : 'bg-white/70 border border-gray-200 shadow-lg hover:shadow-xl hover:-translate-y-1'
+              }`}
+            >
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl bg-turblu-gradient flex items-center justify-center flex-shrink-0">
                   <Rocket className="w-8 h-8 text-white" />
@@ -166,16 +172,11 @@ export default function Home() {
                     Building the future at Turblu. Transforming bold ideas at the intersection of motorsports and tech.
                   </p>
                 </div>
-                <a 
-                  href="https://Turblu.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-turblu-gradient w-14 h-14 rounded-xl flex items-center justify-center hover:scale-105 transition-transform group flex-shrink-0"
-                >
-                  <ArrowUpRight className="w-6 h-6 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+                <div className="bg-turblu-gradient w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform flex-shrink-0">
+                  <ArrowUpRight className="w-6 h-6 text-white" />
+                </div>
               </div>
-            </div>
+            </a>
 
             {/* Signet Jewelers - Current */}
             <div className={`rounded-2xl p-8 md:p-10 transition-all duration-300 ${
