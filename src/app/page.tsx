@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { 
   ArrowUpRight, 
   Briefcase, 
@@ -282,19 +283,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mission Section - With Photo Placeholder */}
+      {/* Mission Section - With Profile Photo */}
       <section id="mission" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className={`rounded-3xl p-12 md:p-16 transition-all duration-300 ${
             darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-xl'
           }`}>
             <div className="flex flex-col md:flex-row items-center gap-12">
-              {/* Photo Placeholder */}
+              {/* Profile Photo */}
               <div className="flex-shrink-0">
-                <div className={`w-48 h-48 md:w-64 md:h-64 rounded-2xl flex items-center justify-center ${
-                  darkMode ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'
+                <div className={`relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden ${
+                  darkMode ? 'ring-2 ring-white/10' : 'ring-2 ring-gray-200'
                 }`}>
-                  <p className={`text-sm ${darkMode ? 'text-white/30' : 'text-gray-400'}`}>Your photo here</p>
+                  <Image
+                    src="/images/headshot.jpg"
+                    alt="Christopher Estep"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 192px, 256px"
+                    priority
+                  />
                 </div>
               </div>
               
