@@ -44,6 +44,9 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 
 // Logo Carousel Component
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
+  // Use theme parameter based on mode, and mix-blend-mode to hide backgrounds
+  const theme = darkMode ? 'dark' : 'light'
+  
   return (
     <div className="relative py-6">
       {/* Scrolling container */}
@@ -59,9 +62,12 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className={`h-10 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                className="h-10 w-auto object-contain"
+                style={{ 
+                  mixBlendMode: darkMode ? 'lighten' : 'darken'
+                }}
                 loading="lazy"
               />
             </div>
@@ -76,9 +82,12 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className={`h-10 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                className="h-10 w-auto object-contain"
+                style={{ 
+                  mixBlendMode: darkMode ? 'lighten' : 'darken'
+                }}
                 loading="lazy"
               />
             </div>
