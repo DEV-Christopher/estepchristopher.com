@@ -48,20 +48,25 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
     <div className="relative py-6">
       {/* Scrolling container - no masks/vignette */}
       <div className="overflow-hidden">
-        <div className="flex animate-scroll">
+        <div className="flex animate-scroll items-center">
           {/* First set of logos */}
           {platformLogos.map((logo, index) => (
             <div
               key={`first-${index}`}
               className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
-                darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+                darkMode ? 'opacity-70 hover:opacity-100' : 'opacity-70 hover:opacity-100'
               }`}
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=128`}
                 alt={logo.name}
-                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                className="h-10 w-auto object-contain brightness-0 invert opacity-80"
+                style={{ 
+                  filter: darkMode 
+                    ? 'brightness(0) invert(1)' 
+                    : 'brightness(0) invert(0.4)'
+                }}
                 loading="lazy"
               />
             </div>
@@ -71,14 +76,19 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
             <div
               key={`second-${index}`}
               className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
-                darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+                darkMode ? 'opacity-70 hover:opacity-100' : 'opacity-70 hover:opacity-100'
               }`}
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=128`}
                 alt={logo.name}
-                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                className="h-10 w-auto object-contain"
+                style={{ 
+                  filter: darkMode 
+                    ? 'brightness(0) invert(1)' 
+                    : 'brightness(0) invert(0.4)'
+                }}
                 loading="lazy"
               />
             </div>
@@ -96,7 +106,7 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
             darkMode ? 'text-white/25 hover:text-white/40' : 'text-gray-400 hover:text-gray-500'
           }`}
         >
-          Logos provided by Logo.dev
+          Logos by Logo.dev
         </a>
       </div>
     </div>
