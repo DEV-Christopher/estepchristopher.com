@@ -47,32 +47,50 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 
 // Logo Carousel Component
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
-  // Use theme parameter based on mode, and mix-blend-mode to hide backgrounds
+  // Use theme parameter based on mode
   const theme = darkMode ? 'dark' : 'light'
   
   return (
     <div className="relative py-6">
       {/* Scrolling container */}
-      <div className="overflow-hidden">
+      <div 
+        className="overflow-hidden"
+        style={{
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+          maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+        }}
+      >
         <div 
           className="flex items-center animate-scroll"
-          style={{ width: 'max-content' }}
+          style={{ 
+            width: 'max-content',
+            willChange: 'transform',
+            WebkitBackfaceVisibility: 'hidden',
+            backfaceVisibility: 'hidden',
+            perspective: 1000,
+            WebkitPerspective: 1000,
+          }}
         >
           {/* First set of logos */}
           {platformLogos.map((logo, index) => (
             <div
               key={`first-${index}`}
-              className={`flex-shrink-0 px-10 flex items-center justify-center transition-all duration-300 ${
+              className={`flex-shrink-0 px-10 flex items-center justify-center transition-opacity duration-300 ${
                 darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
+              style={{
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
+              }}
             >
               <img
                 src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className="h-12 w-auto object-contain"
-                style={{ 
-                  mixBlendMode: darkMode ? 'lighten' : 'darken'
+                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                style={{
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
                 }}
                 loading="lazy"
               />
@@ -82,17 +100,22 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           {platformLogos.map((logo, index) => (
             <div
               key={`second-${index}`}
-              className={`flex-shrink-0 px-10 flex items-center justify-center transition-all duration-300 ${
+              className={`flex-shrink-0 px-10 flex items-center justify-center transition-opacity duration-300 ${
                 darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
+              style={{
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
+              }}
             >
               <img
                 src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className="h-12 w-auto object-contain"
-                style={{ 
-                  mixBlendMode: darkMode ? 'lighten' : 'darken'
+                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                style={{
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
                 }}
                 loading="lazy"
               />
