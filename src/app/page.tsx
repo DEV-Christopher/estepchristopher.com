@@ -30,7 +30,7 @@ const platformLogos = [
   { name: 'Blue Nile', domain: 'bluenile.com' },
   { name: 'Jared', domain: 'jared.com' },
   { name: 'James Allen', domain: 'jamesallen.com' },
-  { name: 'Banter', domain: 'branterbyjared.com' },
+  { name: 'Banter', domain: 'banterbyjared.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
