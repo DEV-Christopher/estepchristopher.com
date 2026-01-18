@@ -24,10 +24,13 @@ const platformLogos = [
   { name: 'UPS', domain: 'ups.com' },
   { name: 'FedEx', domain: 'fedex.com' },
   { name: 'Brinks', domain: 'brinks.com' },
-  { name: 'Loomis', domain: 'loomis.com' },
+  { name: 'Malca-Amit', domain: 'malca-amit.com' },
   // Retail/Jewelry (using parent company and well-known brands)
   { name: 'Signet Jewelers', domain: 'signetjewelers.com' },
   { name: 'Blue Nile', domain: 'bluenile.com' },
+  { name: 'Jared', domain: 'jared.com' },
+  { name: 'James Allen', domain: 'jamesallen.com' },
+  { name: 'Banter', domain: 'branterbyjared.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
