@@ -17,6 +17,89 @@ import {
   Gauge
 } from 'lucide-react'
 
+// Logo data for the carousel
+const platformLogos = [
+  // Enterprise/Carriers
+  { name: 'UPS', domain: 'ups.com' },
+  { name: 'FedEx', domain: 'fedex.com' },
+  { name: 'Malca-Amit', domain: 'malca-amit.com' },
+  { name: 'Titan', domain: 'titansecurityeurope.com' },
+  // Signet Brands
+  { name: 'KAY Jewelers', domain: 'kay.com' },
+  { name: 'Jared', domain: 'jared.com' },
+  { name: 'Zales', domain: 'zales.com' },
+  { name: 'Banter', domain: 'branterbyjared.com' },
+  { name: 'James Allen', domain: 'jamesallen.com' },
+  { name: 'Peoples Jewellers', domain: 'peoplesjewellers.com' },
+  { name: 'Blue Nile', domain: 'bluenile.com' },
+  { name: 'R2Net', domain: 'r2net.com' },
+  // Analytics & Tech Platforms
+  { name: 'Alteryx', domain: 'alteryx.com' },
+  { name: 'Tableau', domain: 'tableau.com' },
+  { name: 'Cloudflare', domain: 'cloudflare.com' },
+  { name: 'Vercel', domain: 'vercel.com' },
+  { name: 'Supabase', domain: 'supabase.com' },
+  { name: 'Stripe', domain: 'stripe.com' },
+  { name: 'Press Ganey', domain: 'pressganey.com' },
+]
+
+// Logo Carousel Component
+function LogoCarousel({ darkMode }: { darkMode: boolean }) {
+  return (
+    <div className="relative overflow-hidden py-8">
+      {/* Gradient masks for smooth fade effect */}
+      <div className={`absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none ${
+        darkMode 
+          ? 'bg-gradient-to-r from-[#0a0a0f] to-transparent' 
+          : 'bg-gradient-to-r from-[#f5f5f7] to-transparent'
+      }`} />
+      <div className={`absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none ${
+        darkMode 
+          ? 'bg-gradient-to-l from-[#0a0a0f] to-transparent' 
+          : 'bg-gradient-to-l from-[#f5f5f7] to-transparent'
+      }`} />
+      
+      {/* Scrolling container */}
+      <div className="flex animate-scroll">
+        {/* First set of logos */}
+        {platformLogos.map((logo, index) => (
+          <div
+            key={`first-${index}`}
+            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
+              darkMode ? 'opacity-40 hover:opacity-80' : 'opacity-50 hover:opacity-90'
+            }`}
+            title={logo.name}
+          >
+            <img
+              src={`https://logo.clearbit.com/${logo.domain}`}
+              alt={logo.name}
+              className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
+              loading="lazy"
+            />
+          </div>
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {platformLogos.map((logo, index) => (
+          <div
+            key={`second-${index}`}
+            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
+              darkMode ? 'opacity-40 hover:opacity-80' : 'opacity-50 hover:opacity-90'
+            }`}
+            title={logo.name}
+          >
+            <img
+              src={`https://logo.clearbit.com/${logo.domain}`}
+              alt={logo.name}
+              className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // Interactive geometric background component
 function GeometricBackground({ darkMode }: { darkMode: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -71,14 +154,14 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
         size: Math.random() * 20 + 10,
         type: ['circle', 'line', 'hexagon', 'triangle'][Math.floor(Math.random() * 4)] as 'circle' | 'line' | 'hexagon' | 'triangle',
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.03, // Increased from 0.01 to 0.03 for faster rotation
+        rotationSpeed: (Math.random() - 0.5) * 0.03,
         opacity: Math.random() * 0.3 + 0.1,
         idleOffsetX: 0,
         idleOffsetY: 0,
-        idleSpeedX: (Math.random() - 0.5) * 0.02 + 0.015, // Slightly faster base movement
+        idleSpeedX: (Math.random() - 0.5) * 0.02 + 0.015,
         idleSpeedY: (Math.random() - 0.5) * 0.02 + 0.015,
         idlePhase: Math.random() * Math.PI * 2,
-        floatRadiusX: Math.random() * 20 + 15, // Increased float radius (15-35px)
+        floatRadiusX: Math.random() * 20 + 15,
         floatRadiusY: Math.random() * 20 + 15
       })
     }
@@ -127,16 +210,14 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
     let time = 0
     const animate = () => {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
-      time += 0.016 // roughly 60fps
+      time += 0.016
 
       const baseColor = darkMode ? '255, 255, 255' : '100, 100, 120'
 
       particlesRef.current.forEach((particle) => {
-        // Enhanced floating movement using sine waves with larger radius
         particle.idleOffsetX = Math.sin(time * particle.idleSpeedX * 50 + particle.idlePhase) * particle.floatRadiusX
         particle.idleOffsetY = Math.cos(time * particle.idleSpeedY * 50 + particle.idlePhase * 1.3) * particle.floatRadiusY
 
-        // Calculate distance from mouse
         const targetX = particle.baseX + particle.idleOffsetX
         const targetY = particle.baseY + particle.idleOffsetY
         
@@ -145,22 +226,18 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
         const distance = Math.sqrt(dx * dx + dy * dy)
         const maxDistance = 150
 
-        // Move particles away from mouse
         if (distance < maxDistance) {
           const force = (maxDistance - distance) / maxDistance
           const angle = Math.atan2(dy, dx)
           particle.x = targetX - Math.cos(angle) * force * 30
           particle.y = targetY - Math.sin(angle) * force * 30
         } else {
-          // Smoothly move towards floating target position
           particle.x += (targetX - particle.x) * 0.08
           particle.y += (targetY - particle.y) * 0.08
         }
 
-        // Rotate (now faster)
         particle.rotation += particle.rotationSpeed
 
-        // Draw particle
         ctx.strokeStyle = `rgba(${baseColor}, ${particle.opacity})`
         ctx.lineWidth = 1
 
@@ -500,6 +577,18 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Tools & Platforms Section */}
+      <section className="py-12 px-6">
+        <div className="max-w-6xl mx-auto">
+          <p className={`text-center text-sm tracking-widest uppercase mb-2 ${
+            darkMode ? 'text-white/40' : 'text-gray-400'
+          }`}>
+            Tools & Platforms I've Scaled
+          </p>
+          <LogoCarousel darkMode={darkMode} />
         </div>
       </section>
 
