@@ -30,7 +30,7 @@ const platformLogos = [
   { name: 'Blue Nile', domain: 'bluenile.com' },
   { name: 'Jared', domain: 'jared.com' },
   { name: 'James Allen', domain: 'jamesallen.com' },
-  { name: 'Banter', domain: 'banter.com' },
+  { name: 'Banter', domain: 'branterbyjared.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
@@ -60,14 +60,14 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
             <div
               key={`first-${index}`}
               className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
-                darkMode ? 'opacity-70 hover:opacity-100' : 'opacity-70 hover:opacity-100'
+                darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
             >
               <img
                 src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className="h-10 w-auto object-contain"
+                className="h-12 w-auto object-contain"
                 style={{ 
                   mixBlendMode: darkMode ? 'lighten' : 'darken'
                 }}
@@ -80,14 +80,14 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
             <div
               key={`second-${index}`}
               className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
-                darkMode ? 'opacity-70 hover:opacity-100' : 'opacity-70 hover:opacity-100'
+                darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
             >
               <img
                 src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
                 alt={logo.name}
-                className="h-10 w-auto object-contain"
+                className="h-12 w-auto object-contain"
                 style={{ 
                   mixBlendMode: darkMode ? 'lighten' : 'darken'
                 }}
