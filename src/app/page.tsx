@@ -46,7 +46,7 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
   return (
     <div className="relative py-6">
-      {/* Scrolling container - no masks/vignette */}
+      {/* Scrolling container */}
       <div className="overflow-hidden">
         <div className="flex animate-scroll items-center">
           {/* First set of logos */}
@@ -59,14 +59,9 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
                 alt={logo.name}
-                className="h-10 w-auto object-contain brightness-0 invert opacity-80"
-                style={{ 
-                  filter: darkMode 
-                    ? 'brightness(0) invert(1)' 
-                    : 'brightness(0) invert(0.4)'
-                }}
+                className={`h-10 w-auto object-contain ${darkMode ? 'invert' : ''}`}
                 loading="lazy"
               />
             </div>
@@ -81,14 +76,9 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
               title={logo.name}
             >
               <img
-                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=128`}
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
                 alt={logo.name}
-                className="h-10 w-auto object-contain"
-                style={{ 
-                  filter: darkMode 
-                    ? 'brightness(0) invert(1)' 
-                    : 'brightness(0) invert(0.4)'
-                }}
+                className={`h-10 w-auto object-contain ${darkMode ? 'invert' : ''}`}
                 loading="lazy"
               />
             </div>
