@@ -17,22 +17,19 @@ import {
   Gauge
 } from 'lucide-react'
 
-// Logo data for the carousel
+// Logo data for the carousel - using logo.dev
 const platformLogos = [
   // Enterprise/Carriers
   { name: 'UPS', domain: 'ups.com' },
   { name: 'FedEx', domain: 'fedex.com' },
   { name: 'Malca-Amit', domain: 'malca-amit.com' },
-  { name: 'Titan', domain: 'titansecurityeurope.com' },
+  { name: 'Brinks', domain: 'brinks.com' },
   // Signet Brands
   { name: 'KAY Jewelers', domain: 'kay.com' },
   { name: 'Jared', domain: 'jared.com' },
   { name: 'Zales', domain: 'zales.com' },
-  { name: 'Banter', domain: 'branterbyjared.com' },
   { name: 'James Allen', domain: 'jamesallen.com' },
-  { name: 'Peoples Jewellers', domain: 'peoplesjewellers.com' },
   { name: 'Blue Nile', domain: 'bluenile.com' },
-  { name: 'R2Net', domain: 'r2net.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
@@ -40,7 +37,6 @@ const platformLogos = [
   { name: 'Vercel', domain: 'vercel.com' },
   { name: 'Supabase', domain: 'supabase.com' },
   { name: 'Stripe', domain: 'stripe.com' },
-  { name: 'Press Ganey', domain: 'pressganey.com' },
 ]
 
 // Logo Carousel Component
@@ -66,12 +62,12 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           <div
             key={`first-${index}`}
             className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
-              darkMode ? 'opacity-40 hover:opacity-80' : 'opacity-50 hover:opacity-90'
+              darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://logo.clearbit.com/${logo.domain}`}
+              src={`https://img.logo.dev/${logo.domain}?token=pk_VAZ6tvAVQHCDwKeaNRVyjQ`}
               alt={logo.name}
               className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
               loading="lazy"
@@ -83,12 +79,12 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           <div
             key={`second-${index}`}
             className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
-              darkMode ? 'opacity-40 hover:opacity-80' : 'opacity-50 hover:opacity-90'
+              darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://logo.clearbit.com/${logo.domain}`}
+              src={`https://img.logo.dev/${logo.domain}?token=pk_VAZ6tvAVQHCDwKeaNRVyjQ`}
               alt={logo.name}
               className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
               loading="lazy"
