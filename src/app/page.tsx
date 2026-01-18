@@ -30,6 +30,7 @@ const platformLogos = [
   { name: 'Zales', domain: 'zales.com' },
   { name: 'James Allen', domain: 'jamesallen.com' },
   { name: 'Blue Nile', domain: 'bluenile.com' },
+  { name: 'R2Net', domain: 'r2net.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
@@ -38,6 +39,8 @@ const platformLogos = [
   { name: 'Supabase', domain: 'supabase.com' },
   { name: 'Stripe', domain: 'stripe.com' },
 ]
+
+const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 
 // Logo Carousel Component
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
@@ -61,13 +64,13 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
         {platformLogos.map((logo, index) => (
           <div
             key={`first-${index}`}
-            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
+            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
               darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://img.logo.dev/${logo.domain}?token=pk_VAZ6tvAVQHCDwKeaNRVyjQ`}
+              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png`}
               alt={logo.name}
               className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
               loading="lazy"
@@ -78,19 +81,33 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
         {platformLogos.map((logo, index) => (
           <div
             key={`second-${index}`}
-            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-opacity duration-300 ${
+            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
               darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://img.logo.dev/${logo.domain}?token=pk_VAZ6tvAVQHCDwKeaNRVyjQ`}
+              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png`}
               alt={logo.name}
               className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
               loading="lazy"
             />
           </div>
         ))}
+      </div>
+      
+      {/* Logo.dev Attribution */}
+      <div className="flex justify-center mt-4">
+        <a 
+          href="https://logo.dev" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className={`text-xs transition-opacity ${
+            darkMode ? 'text-white/30 hover:text-white/50' : 'text-gray-400 hover:text-gray-500'
+          }`}
+        >
+          Logos provided by Logo.dev
+        </a>
       </div>
     </div>
   )
