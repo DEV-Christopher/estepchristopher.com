@@ -30,7 +30,7 @@ const platformLogos = [
   { name: 'Blue Nile', domain: 'bluenile.com' },
   { name: 'Jared', domain: 'jared.com' },
   { name: 'James Allen', domain: 'jamesallen.com' },
-  { name: 'Banter', domain: 'banter.com' },
+  { name: 'Banter', domain: 'branterbyjared.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
@@ -54,12 +54,15 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
     <div className="relative py-6">
       {/* Scrolling container */}
       <div className="overflow-hidden">
-        <div className="flex animate-scroll items-center">
+        <div 
+          className="flex items-center animate-scroll"
+          style={{ width: 'max-content' }}
+        >
           {/* First set of logos */}
           {platformLogos.map((logo, index) => (
             <div
               key={`first-${index}`}
-              className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
+              className={`flex-shrink-0 px-10 flex items-center justify-center transition-all duration-300 ${
                 darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
@@ -79,7 +82,7 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           {platformLogos.map((logo, index) => (
             <div
               key={`second-${index}`}
-              className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
+              className={`flex-shrink-0 px-10 flex items-center justify-center transition-all duration-300 ${
                 darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
               }`}
               title={logo.name}
@@ -326,6 +329,18 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      {/* Dark/Light Mode Toggle */}
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className={`fixed top-6 right-6 z-50 p-3 rounded-full transition-all duration-300 ${
+          darkMode 
+            ? 'glass text-white/70 hover:text-white hover:bg-white/10' 
+            : 'bg-white/80 text-gray-600 hover:text-gray-900 hover:bg-white shadow-lg border border-gray-200'
+        }`}
+        aria-label="Toggle dark mode"
+      >
+        {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      </button>
 
       {/* Floating Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
