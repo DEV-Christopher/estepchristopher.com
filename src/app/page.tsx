@@ -45,71 +45,55 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 // Logo Carousel Component
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
   return (
-    <div className="relative overflow-hidden py-8">
-      {/* Softer gradient masks - more transparent and shorter */}
-      <div 
-        className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{
-          background: darkMode 
-            ? 'linear-gradient(to right, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent)' 
-            : 'linear-gradient(to right, rgba(245, 245, 247, 0.95), rgba(245, 245, 247, 0.7), transparent)'
-        }}
-      />
-      <div 
-        className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-        style={{
-          background: darkMode 
-            ? 'linear-gradient(to left, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent)' 
-            : 'linear-gradient(to left, rgba(245, 245, 247, 0.95), rgba(245, 245, 247, 0.7), transparent)'
-        }}
-      />
-      
-      {/* Scrolling container */}
-      <div className="flex animate-scroll">
-        {/* First set of logos */}
-        {platformLogos.map((logo, index) => (
-          <div
-            key={`first-${index}`}
-            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
-              darkMode ? 'opacity-60 hover:opacity-100' : 'opacity-70 hover:opacity-100'
-            }`}
-            title={logo.name}
-          >
-            <img
-              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true`}
-              alt={logo.name}
-              className={`h-8 w-auto object-contain ${darkMode ? 'invert' : ''}`}
-              loading="lazy"
-            />
-          </div>
-        ))}
-        {/* Duplicate set for seamless loop */}
-        {platformLogos.map((logo, index) => (
-          <div
-            key={`second-${index}`}
-            className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
-              darkMode ? 'opacity-60 hover:opacity-100' : 'opacity-70 hover:opacity-100'
-            }`}
-            title={logo.name}
-          >
-            <img
-              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true`}
-              alt={logo.name}
-              className={`h-8 w-auto object-contain ${darkMode ? 'invert' : ''}`}
-              loading="lazy"
-            />
-          </div>
-        ))}
+    <div className="relative py-6">
+      {/* Scrolling container - no masks/vignette */}
+      <div className="overflow-hidden">
+        <div className="flex animate-scroll">
+          {/* First set of logos */}
+          {platformLogos.map((logo, index) => (
+            <div
+              key={`first-${index}`}
+              className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
+                darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+              }`}
+              title={logo.name}
+            >
+              <img
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                alt={logo.name}
+                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+          {/* Duplicate set for seamless loop */}
+          {platformLogos.map((logo, index) => (
+            <div
+              key={`second-${index}`}
+              className={`flex-shrink-0 mx-10 flex items-center justify-center transition-all duration-300 ${
+                darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+              }`}
+              title={logo.name}
+            >
+              <img
+                src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true&size=128`}
+                alt={logo.name}
+                className={`h-12 w-auto object-contain ${darkMode ? 'invert' : ''}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
       
       {/* Logo.dev Attribution */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-6">
         <a 
           href="https://logo.dev" 
           target="_blank" 
           rel="noopener noreferrer"
           className={`text-xs transition-opacity ${
-            darkMode ? 'text-white/30 hover:text-white/50' : 'text-gray-400 hover:text-gray-500'
+            darkMode ? 'text-white/25 hover:text-white/40' : 'text-gray-400 hover:text-gray-500'
           }`}
         >
           Logos provided by Logo.dev
