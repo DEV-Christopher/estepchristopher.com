@@ -36,6 +36,8 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
     idleSpeedX: number
     idleSpeedY: number
     idlePhase: number
+    floatRadiusX: number
+    floatRadiusY: number
   }>>([])
 
   useEffect(() => {
@@ -69,13 +71,15 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
         size: Math.random() * 20 + 10,
         type: ['circle', 'line', 'hexagon', 'triangle'][Math.floor(Math.random() * 4)] as 'circle' | 'line' | 'hexagon' | 'triangle',
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.01,
+        rotationSpeed: (Math.random() - 0.5) * 0.03, // Increased from 0.01 to 0.03 for faster rotation
         opacity: Math.random() * 0.3 + 0.1,
         idleOffsetX: 0,
         idleOffsetY: 0,
-        idleSpeedX: (Math.random() - 0.5) * 0.02,
-        idleSpeedY: (Math.random() - 0.5) * 0.02,
-        idlePhase: Math.random() * Math.PI * 2
+        idleSpeedX: (Math.random() - 0.5) * 0.02 + 0.015, // Slightly faster base movement
+        idleSpeedY: (Math.random() - 0.5) * 0.02 + 0.015,
+        idlePhase: Math.random() * Math.PI * 2,
+        floatRadiusX: Math.random() * 20 + 15, // Increased float radius (15-35px)
+        floatRadiusY: Math.random() * 20 + 15
       })
     }
 
@@ -128,9 +132,9 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
       const baseColor = darkMode ? '255, 255, 255' : '100, 100, 120'
 
       particlesRef.current.forEach((particle) => {
-        // Subtle idle movement using sine waves
-        particle.idleOffsetX = Math.sin(time * particle.idleSpeedX * 50 + particle.idlePhase) * 3
-        particle.idleOffsetY = Math.cos(time * particle.idleSpeedY * 50 + particle.idlePhase) * 3
+        // Enhanced floating movement using sine waves with larger radius
+        particle.idleOffsetX = Math.sin(time * particle.idleSpeedX * 50 + particle.idlePhase) * particle.floatRadiusX
+        particle.idleOffsetY = Math.cos(time * particle.idleSpeedY * 50 + particle.idlePhase * 1.3) * particle.floatRadiusY
 
         // Calculate distance from mouse
         const targetX = particle.baseX + particle.idleOffsetX
@@ -148,12 +152,12 @@ function GeometricBackground({ darkMode }: { darkMode: boolean }) {
           particle.x = targetX - Math.cos(angle) * force * 30
           particle.y = targetY - Math.sin(angle) * force * 30
         } else {
-          // Slowly move towards idle position
-          particle.x += (targetX - particle.x) * 0.05
-          particle.y += (targetY - particle.y) * 0.05
+          // Smoothly move towards floating target position
+          particle.x += (targetX - particle.x) * 0.08
+          particle.y += (targetY - particle.y) * 0.08
         }
 
-        // Rotate
+        // Rotate (now faster)
         particle.rotation += particle.rotationSpeed
 
         // Draw particle
@@ -500,7 +504,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-6">
+      <section id="contact" className="py-16 px-6 pb-24">
         <div className="max-w-4xl mx-auto text-center">
           <div className={`rounded-3xl p-12 md:p-16 transition-all duration-300 ${
             darkMode ? 'glass-card' : 'bg-white/70 border border-gray-200 shadow-xl'
@@ -542,17 +546,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className={`py-8 px-6 border-t transition-colors duration-300 ${
-        darkMode ? 'border-white/5' : 'border-gray-200'
-      }`}>
-        <div className="max-w-6xl mx-auto text-center">
-          <p className={`text-sm ${darkMode ? 'text-white/30' : 'text-gray-400'}`}>
-            © {new Date().getFullYear()} Christopher Estep. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
   )
 }
