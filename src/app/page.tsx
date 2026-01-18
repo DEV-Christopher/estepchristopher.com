@@ -18,26 +18,26 @@ import {
 } from 'lucide-react'
 
 // Logo data for the carousel - using logo.dev
+// Using domains that logo.dev is most likely to have good coverage for
 const platformLogos = [
   // Enterprise/Carriers
   { name: 'UPS', domain: 'ups.com' },
   { name: 'FedEx', domain: 'fedex.com' },
-  { name: 'Malca-Amit', domain: 'malca-amit.com' },
   { name: 'Brinks', domain: 'brinks.com' },
-  // Signet Brands
-  { name: 'KAY Jewelers', domain: 'kay.com' },
-  { name: 'Jared', domain: 'jared.com' },
-  { name: 'Zales', domain: 'zales.com' },
-  { name: 'James Allen', domain: 'jamesallen.com' },
+  { name: 'Loomis', domain: 'loomis.com' },
+  // Retail/Jewelry (using parent company and well-known brands)
+  { name: 'Signet Jewelers', domain: 'signetjewelers.com' },
   { name: 'Blue Nile', domain: 'bluenile.com' },
-  { name: 'R2Net', domain: 'r2net.com' },
   // Analytics & Tech Platforms
   { name: 'Alteryx', domain: 'alteryx.com' },
   { name: 'Tableau', domain: 'tableau.com' },
+  { name: 'Salesforce', domain: 'salesforce.com' },
   { name: 'Cloudflare', domain: 'cloudflare.com' },
   { name: 'Vercel', domain: 'vercel.com' },
   { name: 'Supabase', domain: 'supabase.com' },
   { name: 'Stripe', domain: 'stripe.com' },
+  { name: 'GitHub', domain: 'github.com' },
+  { name: 'Snowflake', domain: 'snowflake.com' },
 ]
 
 const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
@@ -46,17 +46,23 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
   return (
     <div className="relative overflow-hidden py-8">
-      {/* Gradient masks for smooth fade effect */}
-      <div className={`absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none ${
-        darkMode 
-          ? 'bg-gradient-to-r from-[#0a0a0f] to-transparent' 
-          : 'bg-gradient-to-r from-[#f5f5f7] to-transparent'
-      }`} />
-      <div className={`absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none ${
-        darkMode 
-          ? 'bg-gradient-to-l from-[#0a0a0f] to-transparent' 
-          : 'bg-gradient-to-l from-[#f5f5f7] to-transparent'
-      }`} />
+      {/* Softer gradient masks - more transparent and shorter */}
+      <div 
+        className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+        style={{
+          background: darkMode 
+            ? 'linear-gradient(to right, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent)' 
+            : 'linear-gradient(to right, rgba(245, 245, 247, 0.95), rgba(245, 245, 247, 0.7), transparent)'
+        }}
+      />
+      <div 
+        className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+        style={{
+          background: darkMode 
+            ? 'linear-gradient(to left, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7), transparent)' 
+            : 'linear-gradient(to left, rgba(245, 245, 247, 0.95), rgba(245, 245, 247, 0.7), transparent)'
+        }}
+      />
       
       {/* Scrolling container */}
       <div className="flex animate-scroll">
@@ -65,14 +71,14 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           <div
             key={`first-${index}`}
             className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
-              darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+              darkMode ? 'opacity-60 hover:opacity-100' : 'opacity-70 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png`}
+              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true`}
               alt={logo.name}
-              className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
+              className={`h-8 w-auto object-contain ${darkMode ? 'invert' : ''}`}
               loading="lazy"
             />
           </div>
@@ -82,14 +88,14 @@ function LogoCarousel({ darkMode }: { darkMode: boolean }) {
           <div
             key={`second-${index}`}
             className={`flex-shrink-0 mx-8 flex items-center justify-center h-12 transition-all duration-300 ${
-              darkMode ? 'opacity-50 hover:opacity-90' : 'opacity-60 hover:opacity-100'
+              darkMode ? 'opacity-60 hover:opacity-100' : 'opacity-70 hover:opacity-100'
             }`}
             title={logo.name}
           >
             <img
-              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png`}
+              src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&greyscale=true`}
               alt={logo.name}
-              className={`h-8 w-auto object-contain ${darkMode ? 'brightness-0 invert' : 'grayscale'}`}
+              className={`h-8 w-auto object-contain ${darkMode ? 'invert' : ''}`}
               loading="lazy"
             />
           </div>
