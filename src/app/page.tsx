@@ -10,8 +10,6 @@ import {
   Mail, 
   Linkedin, 
   Rocket,
-  Sun,
-  Moon,
   Terminal,
   Gem,
   Gauge
@@ -40,7 +38,6 @@ const platformLogos = [
   { name: 'Supabase', domain: 'supabase.com' },
   { name: 'Stripe', domain: 'stripe.com' },
   { name: 'GitHub', domain: 'github.com' },
-  { name: 'Snowflake', domain: 'snowflake.com' },
 ]
 
 const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
