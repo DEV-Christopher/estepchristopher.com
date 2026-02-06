@@ -106,6 +106,7 @@ export function GeometricBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -1000, y: -1000 })
   const particlesRef = useRef<Particle[]>([])
+  const visibleRef = useRef(true)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -113,6 +114,13 @@ export function GeometricBackground() {
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+
+    // Pause animation when canvas scrolls out of view
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => { visibleRef.current = entry.isIntersecting },
+      { threshold: 0 }
+    )
+    visibilityObserver.observe(canvas)
 
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth * window.devicePixelRatio
@@ -143,7 +151,12 @@ export function GeometricBackground() {
     canvas.addEventListener('mouseleave', handleMouseLeave)
 
     let time = 0
+    let animationId: number
     const animate = () => {
+      animationId = requestAnimationFrame(animate)
+
+      if (!visibleRef.current) return
+
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
       time += 0.016
 
@@ -171,17 +184,16 @@ export function GeometricBackground() {
         particle.rotation += particle.rotationSpeed
         drawParticle(ctx, particle)
       })
-
-      requestAnimationFrame(animate)
     }
 
-    const animationId = requestAnimationFrame(animate)
+    animationId = requestAnimationFrame(animate)
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
       canvas.removeEventListener('mousemove', handleMouseMove)
       canvas.removeEventListener('mouseleave', handleMouseLeave)
       cancelAnimationFrame(animationId)
+      visibilityObserver.disconnect()
     }
   }, [])
 
