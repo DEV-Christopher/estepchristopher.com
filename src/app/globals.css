@@ -14,17 +14,10 @@
   min-height: 100vh;
 }
 
-/* Light mode background */
-.light-mode {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
-  min-height: 100vh;
-}
-
 /* Fallback for body before JS loads */
 body {
   background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
   min-height: 100vh;
-  transition: background 0.3s ease;
 }
 
 @layer components {
@@ -106,29 +99,4 @@ html {
 /* Selection color */
 ::selection {
   background: rgba(139, 92, 246, 0.3);
-}
-
-/* Light mode selection */
-.light-mode ::selection {
-  background: rgba(139, 92, 246, 0.2);
-}
-
-/* Logo Carousel Animation */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-scroll {
-  animation: scroll 28s linear infinite;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.animate-scroll:hover {
-  animation-play-state: paused;
 }
