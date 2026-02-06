@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import {
   ArrowUpRight,
@@ -14,212 +13,8 @@ import {
   Gem,
   Gauge
 } from 'lucide-react'
-
-// Scroll reveal hook — observes all .reveal elements and adds .visible
-function useScrollReveal() {
-  useEffect(() => {
-    const elements = document.querySelectorAll('.reveal')
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.15 }
-    )
-    elements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-}
-
-// Interactive geometric background component
-function GeometricBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const mouseRef = useRef({ x: -1000, y: -1000 })
-  const particlesRef = useRef<Array<{
-    x: number
-    y: number
-    baseX: number
-    baseY: number
-    size: number
-    type: 'circle' | 'line' | 'hexagon' | 'triangle'
-    rotation: number
-    rotationSpeed: number
-    opacity: number
-    idleOffsetX: number
-    idleOffsetY: number
-    idleSpeedX: number
-    idleSpeedY: number
-    idlePhase: number
-    floatRadiusX: number
-    floatRadiusY: number
-  }>>([])
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
-    }
-
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    // Initialize particles
-    const particleCount = 25
-    particlesRef.current = []
-    
-    for (let i = 0; i < particleCount; i++) {
-      const x = Math.random() * canvas.offsetWidth
-      const y = Math.random() * canvas.offsetHeight
-      particlesRef.current.push({
-        x,
-        y,
-        baseX: x,
-        baseY: y,
-        size: Math.random() * 20 + 10,
-        type: ['circle', 'line', 'hexagon', 'triangle'][Math.floor(Math.random() * 4)] as 'circle' | 'line' | 'hexagon' | 'triangle',
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.03,
-        opacity: Math.random() * 0.3 + 0.1,
-        idleOffsetX: 0,
-        idleOffsetY: 0,
-        idleSpeedX: (Math.random() - 0.5) * 0.02 + 0.015,
-        idleSpeedY: (Math.random() - 0.5) * 0.02 + 0.015,
-        idlePhase: Math.random() * Math.PI * 2,
-        floatRadiusX: Math.random() * 20 + 15,
-        floatRadiusY: Math.random() * 20 + 15
-      })
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      }
-    }
-
-    const handleMouseLeave = () => {
-      mouseRef.current = { x: -1000, y: -1000 }
-    }
-
-    canvas.addEventListener('mousemove', handleMouseMove)
-    canvas.addEventListener('mouseleave', handleMouseLeave)
-
-    const drawHexagon = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
-      ctx.beginPath()
-      for (let i = 0; i < 6; i++) {
-        const angle = rotation + (Math.PI / 3) * i
-        const px = x + size * Math.cos(angle)
-        const py = y + size * Math.sin(angle)
-        if (i === 0) ctx.moveTo(px, py)
-        else ctx.lineTo(px, py)
-      }
-      ctx.closePath()
-      ctx.stroke()
-    }
-
-    const drawTriangle = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, rotation: number) => {
-      ctx.beginPath()
-      for (let i = 0; i < 3; i++) {
-        const angle = rotation + (Math.PI * 2 / 3) * i - Math.PI / 2
-        const px = x + size * Math.cos(angle)
-        const py = y + size * Math.sin(angle)
-        if (i === 0) ctx.moveTo(px, py)
-        else ctx.lineTo(px, py)
-      }
-      ctx.closePath()
-      ctx.stroke()
-    }
-
-    let time = 0
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
-      time += 0.016
-
-      const baseColor = '255, 255, 255'
-
-      particlesRef.current.forEach((particle) => {
-        particle.idleOffsetX = Math.sin(time * particle.idleSpeedX * 50 + particle.idlePhase) * particle.floatRadiusX
-        particle.idleOffsetY = Math.cos(time * particle.idleSpeedY * 50 + particle.idlePhase * 1.3) * particle.floatRadiusY
-
-        const targetX = particle.baseX + particle.idleOffsetX
-        const targetY = particle.baseY + particle.idleOffsetY
-        
-        const dx = mouseRef.current.x - particle.x
-        const dy = mouseRef.current.y - particle.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 150
-
-        if (distance < maxDistance) {
-          const force = (maxDistance - distance) / maxDistance
-          const angle = Math.atan2(dy, dx)
-          particle.x = targetX - Math.cos(angle) * force * 30
-          particle.y = targetY - Math.sin(angle) * force * 30
-        } else {
-          particle.x += (targetX - particle.x) * 0.08
-          particle.y += (targetY - particle.y) * 0.08
-        }
-
-        particle.rotation += particle.rotationSpeed
-
-        ctx.strokeStyle = `rgba(${baseColor}, ${particle.opacity})`
-        ctx.lineWidth = 1
-
-        switch (particle.type) {
-          case 'circle':
-            ctx.beginPath()
-            ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2)
-            ctx.stroke()
-            break
-          case 'line':
-            ctx.beginPath()
-            const lineX = Math.cos(particle.rotation) * particle.size
-            const lineY = Math.sin(particle.rotation) * particle.size
-            ctx.moveTo(particle.x - lineX / 2, particle.y - lineY / 2)
-            ctx.lineTo(particle.x + lineX / 2, particle.y + lineY / 2)
-            ctx.stroke()
-            break
-          case 'hexagon':
-            drawHexagon(ctx, particle.x, particle.y, particle.size / 2, particle.rotation)
-            break
-          case 'triangle':
-            drawTriangle(ctx, particle.x, particle.y, particle.size / 2, particle.rotation)
-            break
-        }
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    const animationId = requestAnimationFrame(animate)
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      canvas.removeEventListener('mousemove', handleMouseMove)
-      canvas.removeEventListener('mouseleave', handleMouseLeave)
-      cancelAnimationFrame(animationId)
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-auto"
-      style={{ opacity: 0.6 }}
-    />
-  )
-}
+import { GeometricBackground } from '@/components/GeometricBackground'
+import { useScrollReveal } from '@/components/useScrollReveal'
 
 export default function Home() {
   useScrollReveal()
@@ -237,7 +32,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Name Only - With Interactive Background */}
+      {/* Hero Section */}
       <section className="min-h-[40vh] flex items-center justify-center px-6 pt-24 relative overflow-hidden">
         <GeometricBackground />
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -251,7 +46,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mission Section - With Profile Photo */}
+      {/* Mission Section */}
       <section id="mission" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-3xl p-12 md:p-16 glass-card reveal">
@@ -283,7 +78,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Journey Section - Career Timeline */}
+      {/* Journey Section */}
       <section id="journey" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white reveal">The Journey So Far</h2>
@@ -292,7 +87,6 @@ export default function Home() {
           </p>
 
           <div className="space-y-6">
-            {/* Turblu - Current */}
             <a
               href="https://www.turblu.com"
               target="_blank"
@@ -324,7 +118,6 @@ export default function Home() {
               </div>
             </a>
 
-            {/* Signet Jewelers - Current */}
             <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
@@ -346,7 +139,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Palmetto Auto Club */}
             <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
