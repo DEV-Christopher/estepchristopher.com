@@ -15,6 +15,26 @@ import {
   Gauge
 } from 'lucide-react'
 
+// Scroll reveal hook — observes all .reveal elements and adds .visible
+function useScrollReveal() {
+  useEffect(() => {
+    const elements = document.querySelectorAll('.reveal')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+}
+
 // Interactive geometric background component
 function GeometricBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -202,6 +222,8 @@ function GeometricBackground() {
 }
 
 export default function Home() {
+  useScrollReveal()
+
   return (
     <div className="min-h-screen dark-mode">
 
@@ -232,7 +254,7 @@ export default function Home() {
       {/* Mission Section - With Profile Photo */}
       <section id="mission" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="rounded-3xl p-12 md:p-16 glass-card">
+          <div className="rounded-3xl p-12 md:p-16 glass-card reveal">
             <div className="flex flex-col md:flex-row items-center gap-12">
               <div className="flex-shrink-0">
                 <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden ring-2 ring-white/10">
@@ -264,8 +286,8 @@ export default function Home() {
       {/* Journey Section - Career Timeline */}
       <section id="journey" className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white">The Journey So Far</h2>
-          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white reveal">The Journey So Far</h2>
+          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50 reveal">
             Focused on technology, innovation, and leadership.
           </p>
 
@@ -276,7 +298,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               id="turblu"
-              className="block rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border cursor-pointer glass-card hover:bg-white/[0.06]"
+              className="block rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border cursor-pointer glass-card hover:bg-white/[0.06] reveal"
             >
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl bg-turblu-gradient flex items-center justify-center flex-shrink-0">
@@ -303,7 +325,7 @@ export default function Home() {
             </a>
 
             {/* Signet Jewelers - Current */}
-            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover">
+            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
                   <Gem className="w-8 h-8 text-white/70" />
@@ -325,7 +347,7 @@ export default function Home() {
             </div>
 
             {/* Palmetto Auto Club */}
-            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover">
+            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
                   <Gauge className="w-8 h-8 text-white/70" />
@@ -347,13 +369,13 @@ export default function Home() {
       {/* What I Bring Section */}
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white">What I Bring</h2>
-          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white reveal">What I Bring</h2>
+          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50 reveal">
             A blend of vision, technical expertise, and leadership
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover">
+          <div className="grid md:grid-cols-3 gap-6 reveal-stagger">
+            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
@@ -363,7 +385,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover">
+            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
                 <Zap className="w-6 h-6 text-white" />
               </div>
@@ -373,7 +395,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover">
+            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
               <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
                 <Briefcase className="w-6 h-6 text-white" />
               </div>
@@ -389,7 +411,7 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="py-16 px-6 pb-24">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="rounded-3xl p-12 md:p-16 glass-card">
+          <div className="rounded-3xl p-12 md:p-16 glass-card reveal">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">Let&apos;s Connect</h2>
             <p className="mb-10 max-w-xl mx-auto text-white/50">
               Always interested in hearing about new opportunities, collaborations, or just a good conversation about tech and motorsports.
