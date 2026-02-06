@@ -125,6 +125,8 @@ html {
 
 .animate-scroll {
   animation: scroll 28s linear infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .animate-scroll:hover {

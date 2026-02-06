@@ -45,77 +45,68 @@ const LOGO_DEV_TOKEN = 'pk_XB1INLOERRqvGMtByWY7ig'
 // Logo Carousel Component
 function LogoCarousel({ darkMode }: { darkMode: boolean }) {
   const theme = darkMode ? 'dark' : 'light'
-  
+  const [imagesLoaded, setImagesLoaded] = useState(false)
+  const loadedCount = useRef(0)
+  const totalImages = platformLogos.length
+
+  const handleImageLoad = () => {
+    loadedCount.current += 1
+    if (loadedCount.current >= totalImages) {
+      setImagesLoaded(true)
+    }
+  }
+
+  const renderLogo = (logo: typeof platformLogos[number], keyPrefix: string, index: number) => (
+    <div
+      key={`${keyPrefix}-${index}`}
+      className="flex-shrink-0 px-10 flex items-center justify-center opacity-75 hover:opacity-100"
+      title={logo.name}
+    >
+      <div style={{ isolation: 'isolate' }}>
+        <img
+          src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
+          alt={logo.name}
+          className="h-12 object-contain"
+          style={{
+            mixBlendMode: darkMode ? 'lighten' : 'darken',
+            width: 128,
+          }}
+          loading="eager"
+          onLoad={keyPrefix === 'first' ? handleImageLoad : undefined}
+        />
+      </div>
+    </div>
+  )
+
   return (
     <div className="relative py-6">
       {/* Scrolling container */}
-      <div 
+      <div
         className="overflow-hidden"
         style={{
           WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
           maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
         }}
       >
-        <div 
-          className="flex items-center animate-scroll"
-          style={{ 
+        <div
+          className={`flex items-center ${imagesLoaded ? 'animate-scroll' : ''}`}
+          style={{
             width: 'max-content',
+            willChange: 'transform',
           }}
         >
           {/* First set of logos */}
-          {platformLogos.map((logo, index) => (
-            <div
-              key={`first-${index}`}
-              className={`flex-shrink-0 px-10 flex items-center justify-center ${
-                darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
-              }`}
-              title={logo.name}
-            >
-              {/* Isolation wrapper to prevent blend mode issues with animation */}
-              <div style={{ isolation: 'isolate' }}>
-                <img
-                  src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
-                  alt={logo.name}
-                  className="h-12 w-auto object-contain"
-                  style={{ 
-                    mixBlendMode: darkMode ? 'lighten' : 'darken',
-                  }}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          ))}
+          {platformLogos.map((logo, index) => renderLogo(logo, 'first', index))}
           {/* Duplicate set for seamless loop */}
-          {platformLogos.map((logo, index) => (
-            <div
-              key={`second-${index}`}
-              className={`flex-shrink-0 px-10 flex items-center justify-center ${
-                darkMode ? 'opacity-75 hover:opacity-100' : 'opacity-75 hover:opacity-100'
-              }`}
-              title={logo.name}
-            >
-              {/* Isolation wrapper to prevent blend mode issues with animation */}
-              <div style={{ isolation: 'isolate' }}>
-                <img
-                  src={`https://img.logo.dev/${logo.domain}?token=${LOGO_DEV_TOKEN}&format=png&theme=${theme}&size=128`}
-                  alt={logo.name}
-                  className="h-12 w-auto object-contain"
-                  style={{ 
-                    mixBlendMode: darkMode ? 'lighten' : 'darken',
-                  }}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          ))}
+          {platformLogos.map((logo, index) => renderLogo(logo, 'second', index))}
         </div>
       </div>
-      
+
       {/* Logo.dev Attribution */}
       <div className="flex justify-center mt-6">
-        <a 
-          href="https://logo.dev" 
-          target="_blank" 
+        <a
+          href="https://logo.dev"
+          target="_blank"
           rel="noopener noreferrer"
           className={`text-xs transition-opacity ${
             darkMode ? 'text-white/25 hover:text-white/40' : 'text-gray-400 hover:text-gray-500'
@@ -603,7 +594,7 @@ export default function Home() {
           <p className={`text-center text-sm tracking-widest uppercase mb-2 ${
             darkMode ? 'text-white/40' : 'text-gray-400'
           }`}>
-            Tools & Platforms I've Scaled
+            Tools & Platforms I&apos;ve Scaled
           </p>
           <LogoCarousel darkMode={darkMode} />
         </div>
