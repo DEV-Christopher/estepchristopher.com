@@ -144,6 +144,7 @@ export default function Home() {
                     src="/images/headshot.jpg"
                     alt="Christopher Estep"
                     fill
+                    quality={90}
                     className="object-cover"
                     sizes="(max-width: 768px) 176px, 224px"
                   />
@@ -162,8 +163,8 @@ export default function Home() {
                     <span className="text-white font-medium">Signet Jewelers</span>.
                   </li>
                   <li>
-                    Growing the <span className="text-white font-medium">Palmetto Auto Club</span> community
-                    and its philanthropic events.
+                    Growing the <span className="text-white font-medium">Turblu motorsports community</span> —
+                    nationwide, not just the East Coast.
                   </li>
                 </ul>
               </div>
