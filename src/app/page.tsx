@@ -96,9 +96,9 @@ export default function Home() {
               </p>
               <PhotoSlot
                 src="/images/palmetto-rally.jpg"
-                alt="Christopher's black Corvette Grand Sport with rally number 621 decals, with an Audi R8 lined up behind it at a Palmetto Auto Club rally"
+                alt="Christopher's black Corvette Grand Sport wearing Rally2Dragon decals, with an Audi R8 lined up behind it at an East Coast car meet"
                 label="Photo slot: a Palmetto rally or event shot"
-                caption="Rally2Dragon — my Grand Sport, with Asa Gladstein's (CEO, Crown Rally) R8 behind it."
+                caption="East Coast car meet — my Grand Sport, still wearing its Rally2Dragon decals, next to my friend Asa Gladstein's R8. He happens to run Crown Rally."
                 className="aspect-[3/2] w-full"
               />
             </article>
