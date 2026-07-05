@@ -1,234 +1,208 @@
 'use client'
 
 import Image from 'next/image'
-import {
-  ArrowUpRight,
-  Briefcase,
-  Zap,
-  Lightbulb,
-  Mail,
-  Linkedin,
-  Rocket,
-  Terminal,
-  Gem,
-  Gauge
-} from 'lucide-react'
+import { ArrowUpRight, Mail, Linkedin, MapPin } from 'lucide-react'
 import { GeometricBackground } from '@/components/GeometricBackground'
+import { PhotoSlot } from '@/components/PhotoSlot'
 import { useScrollReveal } from '@/components/useScrollReveal'
 
 export default function Home() {
   useScrollReveal()
 
   return (
-    <div className="min-h-screen dark-mode">
+    <div className="min-h-screen">
 
       {/* Floating Navigation */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="rounded-full px-8 py-3 flex items-center gap-8 nav-pill">
-          <a href="#mission" className="text-sm text-white/70 hover:text-white transition-colors">Mission</a>
-          <a href="#journey" className="text-sm text-white/70 hover:text-white transition-colors">Journey</a>
-          <a href="#turblu" className="text-sm text-white/70 hover:text-white transition-colors">Turblu</a>
+        <div className="rounded-full px-5 py-3 flex items-center gap-5 sm:px-8 sm:gap-8 nav-pill">
+          <a href="#story" className="text-sm text-white/70 hover:text-white transition-colors">Story</a>
+          <a href="#now" className="text-sm text-white/70 hover:text-white transition-colors">Now</a>
           <a href="#contact" className="text-sm text-white/70 hover:text-white transition-colors">Contact</a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-[40vh] flex items-center justify-center px-6 pt-24 relative overflow-hidden">
+      {/* Hero */}
+      <section className="min-h-[70vh] flex items-center justify-center px-6 pt-24 relative overflow-hidden">
         <GeometricBackground />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="flex items-center justify-center gap-2 mb-4 text-white/50">
-            <Terminal className="w-4 h-4" />
-            <p className="text-sm tracking-widest uppercase">Tech Founder & CEO</p>
+          <div className="flex items-center justify-center gap-2 mb-6 text-white/50">
+            <MapPin className="w-4 h-4" aria-hidden="true" />
+            <p className="kicker">Venice Beach, California</p>
           </div>
-          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-white">
+          <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight text-white mb-6">
             Christopher Estep
           </h1>
+          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+            Founder of <a href="https://www.turblu.com" target="_blank" rel="noopener noreferrer" className="turblu-gradient-text font-medium">Turblu</a>.
+            Supply chain leader at Signet Jewelers. I build companies and
+            communities around the things I love — starting with cars.
+          </p>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section id="mission" className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="rounded-3xl p-12 md:p-16 glass-card reveal">
-            <div className="flex flex-col md:flex-row items-center gap-12">
+      {/* Story */}
+      <section id="story" className="py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-14 reveal">
+            <span className="accent-tick mb-4" aria-hidden="true" />
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-white mb-3">The story so far</h2>
+            <p className="text-white/50 text-lg">
+              Four chapters, one through line: take ownership of something real, then make it better.
+            </p>
+          </div>
+
+          <div className="timeline space-y-16 pl-10 md:pl-16">
+
+            {/* Chapter 01 — Aiken */}
+            <article className="relative reveal">
+              <span className="absolute -left-10 md:-left-16 top-1 font-mono text-sm text-race" aria-hidden="true">01</span>
+              <p className="kicker mb-3">Aiken, South Carolina</p>
+              <h3 className="font-display text-2xl font-semibold text-white mb-4">The ER floor</h3>
+              <p className="text-lg leading-relaxed text-white/70">
+                I started at eighteen, running the Patient Advocate process for the Emergency
+                Department at Aiken Regional Medical Centers. When someone&apos;s worst day walks
+                through the door, you learn fast how to listen, take ownership, and get things
+                done inside a system much bigger than you. It was operations training before
+                I knew the word for it.
+              </p>
+            </article>
+
+            {/* Chapter 02 — Signet */}
+            <article className="relative reveal">
+              <span className="absolute -left-10 md:-left-16 top-1 font-mono text-sm text-race" aria-hidden="true">02</span>
+              <p className="kicker mb-3">Signet Jewelers</p>
+              <h3 className="font-display text-2xl font-semibold text-white mb-4">Learning to operate at scale</h3>
+              <p className="text-lg leading-relaxed text-white/70">
+                From the ER I moved into supply chain at Signet Jewelers, the world&apos;s largest
+                diamond jewelry retailer. Working alongside senior leadership and the C-suite,
+                I&apos;ve led enterprise initiatives spanning cost savings and acquisitions —
+                including halving transit loss, worth millions of dollars in annual savings
+                for a multi-billion dollar business.
+              </p>
+            </article>
+
+            {/* Chapter 03 — Palmetto Auto Club */}
+            <article className="relative reveal">
+              <span className="absolute -left-10 md:-left-16 top-1 font-mono text-sm text-race" aria-hidden="true">03</span>
+              <p className="kicker mb-3">East Coast · 2021</p>
+              <h3 className="font-display text-2xl font-semibold text-white mb-4">Palmetto Auto Club</h3>
+              <p className="text-lg leading-relaxed text-white/70 mb-6">
+                Cars were always the constant. In 2021 I founded Palmetto Auto Club, a
+                philanthropic community for East Coast car enthusiasts — premium rallies,
+                curated events, and fundraising that gives the car scene a purpose bigger
+                than the cars themselves.
+              </p>
+              {/* Swap in a real photo: <PhotoSlot src="/images/palmetto.jpg" ... /> */}
+              <PhotoSlot
+                alt="Palmetto Auto Club event"
+                label="Photo slot: a Palmetto rally or event shot"
+                className="aspect-[2/1] w-full"
+              />
+            </article>
+
+            {/* Chapter 04 — Turblu */}
+            <article className="relative reveal">
+              <span className="absolute -left-10 md:-left-16 top-1 font-mono text-sm text-race" aria-hidden="true">04</span>
+              <p className="kicker mb-3">Venice Beach, California</p>
+              <h3 className="font-display text-2xl font-semibold text-white mb-4">
+                <span className="turblu-gradient-text">Turblu</span>
+              </h3>
+              <p className="text-lg leading-relaxed text-white/70 mb-6">
+                Then I bet on myself. I moved across the country to Venice Beach, California,
+                and founded Turblu — bringing the two threads of my life together, building
+                at the intersection of motorsports and technology.
+              </p>
+              <a
+                href="https://www.turblu.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-turblu-gradient text-white text-sm font-medium hover:opacity-90 transition-opacity mb-6"
+              >
+                Visit turblu.com
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+              {/* Swap in a real photo: <PhotoSlot src="/images/venice.jpg" ... /> */}
+              <PhotoSlot
+                alt="Venice Beach or Turblu"
+                label="Photo slot: Venice Beach, the workspace, or Turblu in action"
+                className="aspect-[2/1] w-full"
+              />
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Now */}
+      <section id="now" className="py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-3xl p-10 md:p-14 card reveal">
+            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-14">
               <div className="flex-shrink-0">
-                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-2xl overflow-hidden ring-2 ring-white/10">
+                <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-2xl overflow-hidden ring-1 ring-white/10">
                   <Image
                     src="/images/headshot.jpg"
                     alt="Christopher Estep"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 192px, 256px"
-                    priority
+                    sizes="(max-width: 768px) 176px, 224px"
                   />
                 </div>
               </div>
               <div className="flex-1 text-center md:text-left">
-                <p className="text-sm tracking-widest uppercase mb-4 text-white/50">My Mission</p>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6 text-white">
-                  To build technology that accelerates human potential and creates lasting impact.
-                </h2>
-                <p className="text-lg leading-relaxed text-white/60">
-                  I believe the best companies are built at the intersection of passion and purpose.
-                  Every venture I pursue is driven by this conviction.
-                </p>
+                <span className="accent-tick mb-4" aria-hidden="true" />
+                <h2 className="font-display text-3xl md:text-4xl font-semibold text-white mb-6">Now</h2>
+                <ul className="space-y-4 text-lg text-white/70 leading-relaxed">
+                  <li>
+                    Building <span className="text-white font-medium">Turblu</span> from Venice Beach —
+                    motorsports meets technology.
+                  </li>
+                  <li>
+                    Leading strategic supply chain initiatives at{' '}
+                    <span className="text-white font-medium">Signet Jewelers</span>.
+                  </li>
+                  <li>
+                    Growing the <span className="text-white font-medium">Palmetto Auto Club</span> community
+                    and its philanthropic events.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Journey Section */}
-      <section id="journey" className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white reveal">The Journey So Far</h2>
-          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50 reveal">
-            Focused on technology, innovation, and leadership.
+      {/* Contact */}
+      <section id="contact" className="py-20 px-6 pb-28">
+        <div className="max-w-3xl mx-auto text-center reveal">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4 text-white">Let&apos;s talk</h2>
+          <p className="mb-10 max-w-xl mx-auto text-white/50 text-lg">
+            New opportunities, collaborations, or a good conversation about tech and motorsports.
           </p>
-
-          <div className="space-y-6">
+          <div className="flex items-center justify-center gap-4 flex-wrap">
             <a
-              href="https://www.turblu.com"
+              href="mailto:hello@estepchristopher.com"
+              className="px-6 py-3 rounded-full flex items-center gap-2 card card-hover text-white/80 hover:text-white"
+            >
+              <Mail className="w-5 h-5" aria-hidden="true" />
+              Email
+            </a>
+            <a
+              href="https://www.linkedin.com/in/christopher-estep-8b736312a/"
               target="_blank"
               rel="noopener noreferrer"
-              id="turblu"
-              className="block rounded-2xl p-8 md:p-10 transition-all duration-300 turblu-gradient-border cursor-pointer glass-card hover:bg-white/[0.06] reveal"
+              className="px-6 py-3 rounded-full flex items-center gap-2 card card-hover text-white/80 hover:text-white"
             >
-              <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className="w-16 h-16 rounded-xl bg-turblu-gradient flex items-center justify-center flex-shrink-0">
-                  <Rocket className="w-8 h-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h3 className="text-2xl font-semibold text-white">
-                      <span className="turblu-gradient-text">Turblu</span>
-                    </h3>
-                    <span className="bg-turblu-gradient text-white text-xs px-3 py-1 rounded-full font-medium">
-                      Current
-                    </span>
-                  </div>
-                  <p className="text-sm mb-3 text-white/50">Founder & CEO</p>
-                  <p className="text-lg leading-relaxed text-white/70">
-                    Building the future at Turblu. Transforming bold ideas at the intersection of motorsports and tech.
-                  </p>
-                </div>
-                <div className="bg-turblu-gradient w-14 h-14 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform flex-shrink-0">
-                  <ArrowUpRight className="w-6 h-6 text-white" />
-                </div>
-              </div>
+              <Linkedin className="w-5 h-5" aria-hidden="true" />
+              LinkedIn
             </a>
-
-            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
-              <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
-                  <Gem className="w-8 h-8 text-white/70" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h3 className="text-2xl font-semibold text-white">Signet Jewelers</h3>
-                    <span className="text-xs px-3 py-1 rounded-full font-medium bg-white/10 text-white/70">
-                      Current
-                    </span>
-                  </div>
-                  <p className="text-sm mb-3 text-white/50">Supply Chain Leadership</p>
-                  <p className="text-lg leading-relaxed text-white/70">
-                    Working closely with senior leadership and C-suite on strategic supply chain initiatives at this multi-billion dollar retailer.
-                    Achieved significant operational improvements, including halving transit loss, saving millions annually.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl p-8 md:p-10 transition-all duration-300 glass-card glass-card-hover reveal">
-              <div className="flex flex-col md:flex-row md:items-center gap-6">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/10">
-                  <Gauge className="w-8 h-8 text-white/70" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-semibold mb-1 text-white">Palmetto Auto Club</h3>
-                  <p className="text-sm mb-3 text-white/50">Founder</p>
-                  <p className="text-lg leading-relaxed text-white/70">
-                    Founded in 2021 to connect East Coast car enthusiasts through premium rallies, curated events, and philanthropic initiatives.
-                    Built an upscale community experience for automotive passion and giving back.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* What I Bring Section */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-center text-white reveal">What I Bring</h2>
-          <p className="text-center mb-12 max-w-2xl mx-auto text-white/50 reveal">
-            A blend of vision, technical expertise, and leadership
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6 reveal-stagger">
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
-              <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
-                <Lightbulb className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Founder</h3>
-              <p className="leading-relaxed text-white/60">
-                Identifying opportunities and building companies that solve real problems. From zero to one, repeatedly.
-              </p>
-            </div>
-
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
-              <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Operations & Analytics</h3>
-              <p className="leading-relaxed text-white/60">
-                Turning data into millions of dollars through advanced analytics like Alteryx and process optimization. Building efficient systems that scale with the business.
-              </p>
-            </div>
-
-            <div className="rounded-2xl p-8 transition-all duration-300 glass-card glass-card-hover reveal">
-              <div className="w-12 h-12 rounded-xl bg-turblu-gradient flex items-center justify-center mb-6">
-                <Briefcase className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-white">Leader</h3>
-              <p className="leading-relaxed text-white/60">
-                Building and scaling teams that ship exceptional products. Culture-first, results-driven.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-16 px-6 pb-24">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="rounded-3xl p-12 md:p-16 glass-card reveal">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-white">Let&apos;s Connect</h2>
-            <p className="mb-10 max-w-xl mx-auto text-white/50">
-              Always interested in hearing about new opportunities, collaborations, or just a good conversation about tech and motorsports.
-            </p>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <a
-                href="mailto:hello@estepchristopher.com"
-                className="px-6 py-3 rounded-full flex items-center gap-2 transition-all glass glass-card-hover text-white/80 hover:text-white"
-              >
-                <Mail className="w-5 h-5" />
-                Email
-              </a>
-              <a
-                href="https://www.linkedin.com/in/christopher-estep-8b736312a/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-full flex items-center gap-2 transition-all glass glass-card-hover text-white/80 hover:text-white"
-              >
-                <Linkedin className="w-5 h-5" />
-                LinkedIn
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <footer className="pb-10 px-6 text-center">
+        <p className="text-sm text-white/30">© {new Date().getFullYear()} Christopher Estep · Venice Beach, CA</p>
+      </footer>
     </div>
   )
 }
