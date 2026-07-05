@@ -7,15 +7,28 @@ type PhotoSlotProps = {
   alt: string
   /** Hint shown inside the placeholder about what photo belongs here */
   label: string
+  /** Short caption rendered under the photo */
+  caption?: string
   className?: string
 }
 
-export function PhotoSlot({ src, alt, label, className = '' }: PhotoSlotProps) {
+export function PhotoSlot({ src, alt, label, caption, className = '' }: PhotoSlotProps) {
   if (src) {
     return (
-      <div className={`relative overflow-hidden rounded-2xl ${className}`}>
-        <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 480px" />
-      </div>
+      <figure>
+        <div className={`relative overflow-hidden rounded-2xl ring-1 ring-white/10 ${className}`}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 90vw, 660px"
+          />
+        </div>
+        {caption && (
+          <figcaption className="mt-3 text-sm text-white/40">{caption}</figcaption>
+        )}
+      </figure>
     )
   }
 

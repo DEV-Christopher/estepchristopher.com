@@ -94,11 +94,12 @@ export default function Home() {
                 curated events, and fundraising that gives the car scene a purpose bigger
                 than the cars themselves.
               </p>
-              {/* Swap in a real photo: <PhotoSlot src="/images/palmetto.jpg" ... /> */}
               <PhotoSlot
-                alt="Palmetto Auto Club event"
+                src="/images/palmetto-rally.jpg"
+                alt="Christopher's black Corvette Grand Sport with rally number 621 decals, with an Audi R8 lined up behind it at a Palmetto Auto Club rally"
                 label="Photo slot: a Palmetto rally or event shot"
-                className="aspect-[2/1] w-full"
+                caption="Rally2Dragon — my Grand Sport, with Asa Gladstein's (CEO, Crown Rally) R8 behind it."
+                className="aspect-[3/2] w-full"
               />
             </article>
 
@@ -123,11 +124,12 @@ export default function Home() {
                 Visit turblu.com
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </a>
-              {/* Swap in a real photo: <PhotoSlot src="/images/venice.jpg" ... /> */}
               <PhotoSlot
-                alt="Venice Beach or Turblu"
+                src="/images/turblu-retreat.jpg"
+                alt="Three members of the Turblu team wearing Turblu hats on a bridge over the Venice canals"
                 label="Photo slot: Venice Beach, the workspace, or Turblu in action"
-                className="aspect-[2/1] w-full"
+                caption="First Turblu retreat — the Venice canals, a five-minute walk from HQ."
+                className="aspect-[3/2] w-full"
               />
             </article>
 
