@@ -15,13 +15,22 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-display',
 })
 
-const description =
+// ~150 chars for Google search snippets
+const metaDescription =
+  'Founder of Turblu, building at the intersection of motorsports and technology. Supply chain leader at Signet Jewelers. Based in Venice Beach, CA.'
+
+// ~115 chars for social link previews, which truncate earlier
+const socialDescription =
+  'Founder of Turblu — motorsports meets technology. Supply chain leader at Signet Jewelers. Venice Beach, California.'
+
+// Unconstrained length for structured data
+const jsonLdDescription =
   'Founder of Turblu, building at the intersection of motorsports and technology. Supply chain leader at Signet Jewelers. Founder of Palmetto Auto Club. From the ER floor in Aiken, South Carolina to Venice Beach, California.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://estepchristopher.com'),
   title: 'Christopher Estep | Founder of Turblu',
-  description,
+  description: metaDescription,
   keywords: [
     'Christopher Estep',
     'Turblu',
@@ -36,7 +45,7 @@ export const metadata: Metadata = {
   creator: 'Christopher Estep',
   openGraph: {
     title: 'Christopher Estep | Founder of Turblu',
-    description,
+    description: socialDescription,
     url: 'https://estepchristopher.com',
     siteName: 'Christopher Estep',
     locale: 'en_US',
@@ -45,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Christopher Estep | Founder of Turblu',
-    description,
+    description: socialDescription,
   },
   robots: {
     index: true,
@@ -73,7 +82,7 @@ export default function RootLayout({
               name: 'Christopher Estep',
               url: 'https://estepchristopher.com',
               jobTitle: 'Founder & CEO',
-              description,
+              description: jsonLdDescription,
               homeLocation: {
                 '@type': 'Place',
                 name: 'Venice Beach, California',
