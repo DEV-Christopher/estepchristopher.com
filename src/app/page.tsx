@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { ArrowUpRight, Mail, Linkedin, MapPin } from 'lucide-react'
 import { GeometricBackground } from '@/components/GeometricBackground'
+import { VeniceTicker } from '@/components/VeniceTicker'
 import { PhotoSlot } from '@/components/PhotoSlot'
 import { useScrollReveal } from '@/components/useScrollReveal'
 
@@ -25,9 +26,11 @@ export default function Home() {
       <section className="min-h-[70vh] flex items-center justify-center px-6 pt-24 relative overflow-hidden">
         <GeometricBackground />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="flex items-center justify-center gap-2 mb-6 text-white/50">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 mb-6 text-white/50">
             <MapPin className="w-4 h-4" aria-hidden="true" />
             <p className="kicker">Venice Beach, California</p>
+            <span className="kicker" aria-hidden="true">·</span>
+            <VeniceTicker />
           </div>
           <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight text-white mb-6">
             Christopher Estep

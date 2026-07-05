@@ -100,6 +100,16 @@ body {
   }
 }
 
+/* Flashing colon on the Venice clock */
+.colon-blink {
+  animation: colon-blink 1s step-end infinite;
+}
+
+@keyframes colon-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -139,5 +149,8 @@ html {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .colon-blink {
+    animation: none;
   }
 }
