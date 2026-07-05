@@ -34,8 +34,10 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
             Founder of <a href="https://www.turblu.com" target="_blank" rel="noopener noreferrer" className="turblu-gradient-text font-medium">Turblu</a>.
-            Supply chain leader at Signet Jewelers. I build companies and
-            communities around the things I love — starting with cars.
+            Supply chain leader at Signet Jewelers.
+            <span className="block mt-3">
+              I build companies and communities around the things I love — starting with cars.
+            </span>
           </p>
         </div>
       </section>
@@ -47,7 +49,7 @@ export default function Home() {
             <span className="accent-tick mb-4" aria-hidden="true" />
             <h2 className="font-display text-3xl md:text-4xl font-semibold text-white mb-3">The story so far</h2>
             <p className="text-white/50 text-lg">
-              Four chapters, one through line: take ownership of something real, then make it better.
+              Four chapters: take ownership of something real, then make it better.
             </p>
           </div>
 
@@ -156,7 +158,7 @@ export default function Home() {
                 <ul className="space-y-4 text-lg text-white/70 leading-relaxed">
                   <li>
                     Building <span className="text-white font-medium">Turblu</span> from Venice Beach —
-                    motorsports meets technology.
+                    AI infrastructure layer for motorsports.
                   </li>
                   <li>
                     Leading strategic supply chain initiatives at{' '}
@@ -164,7 +166,7 @@ export default function Home() {
                   </li>
                   <li>
                     Growing the <span className="text-white font-medium">Turblu motorsports community</span> —
-                    nationwide, not just the East Coast.
+                    worldwide.
                   </li>
                 </ul>
               </div>
